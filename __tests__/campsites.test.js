@@ -8,16 +8,16 @@ describe('demo routes', () => {
         setup(pool);
     });
 
-    it('should return and save a campsite that is within x miles of a given city', async () => {
-        const query = { city: 'Portland', state: 'Oregon', radius: 50 };
-        const result = await request(app).post('/api/v1/campsites').send(query);
-        expect(result.body).toEqual({
-            id: expect.any(String),
-            campsiteName: expect.any(String),
-            typeOfUse: expect.any(String),
-            lat: expect.any(Number),
-            long: expect.any(Number),
-        });
+    it('should save and return a campsite that is within x miles of a given city', async () => {
+        const query = { city: 'Portland', state: 'Oregon', radius: 75 };
+        const result = await request(app).post('/api/campsites').send(query);
+        expect(result.body).toEqual(
+            expect.objectContaining({
+                id: expect.any(Number),
+                lat: expect.any(Number),
+                long: expect.any(Number),
+            })
+        );
     });
 
     afterAll(() => {
