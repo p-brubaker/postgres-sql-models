@@ -20,6 +20,17 @@ describe('demo routes', () => {
         );
     });
 
+    it('should get all campsites in the database', async () => {
+        const result = await request(app).get('/api/campsites');
+        expect(result.body).toEqual(
+            expect.objectContaining({
+                id: expect.any(Number),
+                lat: expect.any(Number),
+                long: expect.any(Number),
+            })
+        );
+    });
+
     afterAll(() => {
         pool.end();
     });
