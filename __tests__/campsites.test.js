@@ -35,7 +35,7 @@ describe('demo routes', () => {
         );
     });
 
-    it('should get all campsites in the database', async () => {
+    it.skip('should get all campsites in the database', async () => {
         await request(app)
             .post('/api/campsites')
             .send({ city: 'Seattle', state: 'Washington', radius: 75 })
