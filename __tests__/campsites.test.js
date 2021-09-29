@@ -97,6 +97,16 @@ describe('demo routes', () => {
         );
     });
 
+    it('should delete a campsite from the database by id', async () => {
+        await setup(pool);
+        await request(app)
+            .post('/api/campsites')
+            .send({ city: 'Portland', state: 'Oregon', radius: 75 });
+        await request(app).delete('/api/campsites/1');
+        const res = await request(app).get('/api/campsites');
+        expect(res.body).toEqual([]);
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
