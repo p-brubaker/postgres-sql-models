@@ -28,7 +28,6 @@
         "nodemon": "^2.0.13",
         "prettier": "^2.4.1",
         "msw": "^0.28.0",
-        "whatwg-fetch": "^3.6.2",
         "supertest": "^6.1.6"
     },
     "dependencies": {

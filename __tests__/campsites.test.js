@@ -3,7 +3,6 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 import mockCampsiteData from './mockCampsitesRes.json';
-import 'whatwg-fetch';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
