@@ -63,8 +63,11 @@ describe('demo routes', () => {
 
     it('should get a campsite by id', async () => {
         await setup(pool);
-        const campsite = await request(app).get('/api/campsites/1');
-        expect(campsite).toEqual(
+        await request(app)
+            .post('/api/campsites')
+            .send({ city: 'Portland', state: 'Oregon', radius: 75 });
+        const result = await request(app).get('/api/campsites/1');
+        expect(result.body).toEqual(
             expect.objectContaining({
                 id: 1,
                 lat: expect.any(Number),
