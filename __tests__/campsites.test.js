@@ -24,6 +24,7 @@ describe('demo routes', () => {
     afterEach(() => server.resetHandlers());
 
     it('should save and return a campsite that is within x miles of a given city', async () => {
+        await setup(pool);
         const query = { city: 'Portland', state: 'Oregon', radius: 75 };
         const result = await request(app).post('/api/campsites').send(query);
         expect(result.body).toEqual(
@@ -35,7 +36,8 @@ describe('demo routes', () => {
         );
     });
 
-    it.skip('should get all campsites in the database', async () => {
+    it('should get all campsites in the database', async () => {
+        await setup(pool);
         await request(app)
             .post('/api/campsites')
             .send({ city: 'Seattle', state: 'Washington', radius: 75 })
