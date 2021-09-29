@@ -62,6 +62,18 @@ describe('demo routes', () => {
         );
     });
 
+    it('should get a campsite by id', async () => {
+        await setup(pool);
+        const campsite = await request(app).get('/api/campsites/1');
+        expect(campsite).toEqual(
+            expect.objectContaining({
+                id: 1,
+                lat: expect.any(Number),
+                long: expect.any(Number),
+            })
+        );
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
