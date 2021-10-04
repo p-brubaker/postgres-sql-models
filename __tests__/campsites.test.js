@@ -16,7 +16,11 @@ describe('demo routes', () => {
         )
     );
 
-    beforeAll(() => server.listen());
+    beforeAll(() =>
+        server.listen({
+            onUnhandledRequest: 'bypass',
+        })
+    );
     afterEach(() => server.resetHandlers());
 
     it('should save and return a campsite that is within x miles of a given city', async () => {
