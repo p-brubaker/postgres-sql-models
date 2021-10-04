@@ -108,6 +108,16 @@ describe('Rec Area routes', () => {
         );
     });
 
+    it('should delete a recarea from the database by id', async () => {
+        await setup(pool);
+        await request(app)
+            .post('/api/recareas')
+            .send({ city: 'Portland', state: 'Oregon', radius: 100 });
+        await request(app).delete('/api/recareas/1');
+        const res = await request(app).get('/api/recareas');
+        expect(res.body).toEqual([]);
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
