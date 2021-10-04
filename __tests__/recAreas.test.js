@@ -75,6 +75,22 @@ describe('Rec Area routes', () => {
         );
     });
 
+    it('should get a recarea by id', async () => {
+        await setup(pool);
+        await request(app)
+            .post('/api/recareas')
+            .send({ city: 'Portland', state: 'Oregon', radius: 100 });
+        const result = await request(app).get('/api/recareas/1');
+        expect(result.body).toEqual(
+            expect.objectContaining({
+                id: 1,
+                lat: expect.any(Number),
+                long: expect.any(Number),
+                recAreaName: expect.any(String),
+            })
+        );
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
