@@ -1,12 +1,12 @@
-import pool from '../lib/utils/pool.js';
-import setup from '../data/setup.js';
+import pool from '../../lib/utils/pool.js';
+import setup from '../../data/setup.js';
 import request from 'supertest';
-import app from '../lib/app.js';
+import app from '../../lib/app.js';
 import mockCampsiteData from './mockCampsitesRes.json';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
-describe('demo routes', () => {
+describe('Campsite routes', () => {
     const server = setupServer(
         rest.get(
             'https://ridb.recreation.gov/api/v1/campsites',
