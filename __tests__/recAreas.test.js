@@ -91,6 +91,23 @@ describe('Rec Area routes', () => {
         );
     });
 
+    it('should update a rec area by id', async () => {
+        await setup(pool);
+        await request(app)
+            .post('/api/recareas')
+            .send({ city: 'Portland', state: 'Oregon', radius: 100 });
+        const result = await request(app).patch('/api/recareas/1').send({
+            recAreaName: 'The Edge of the World',
+            recAreaDescription: 'Here there be dragons',
+        });
+        expect(result.body).toEqual(
+            expect.objectContaining({
+                recAreaName: 'The Edge of the World',
+                recAreaDescription: 'Here there be dragons',
+            })
+        );
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
