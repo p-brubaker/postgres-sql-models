@@ -40,6 +40,41 @@ describe('Rec Area routes', () => {
         );
     });
 
+    it('should get all recareas in the database', async () => {
+        await setup(pool);
+        await request(app)
+            .post('/api/recareas')
+            .send({ city: 'Las Vegas', state: 'Nevada', radius: 200 })
+            .then(async () => {
+                await request(app).post('/api/recareas').send({
+                    city: 'Portland',
+                    state: 'Oregon',
+                    radius: 100,
+                });
+            });
+        const result = await request(app).get('/api/recareas');
+        expect(result.body).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    id: expect.any(Number),
+                    lat: expect.any(Number),
+                    long: expect.any(Number),
+                    recAreaName: expect.any(String),
+                    recAreaDescription: expect.any(String),
+                    recAreaDirections: expect.any(String),
+                }),
+                expect.objectContaining({
+                    id: expect.any(Number),
+                    lat: expect.any(Number),
+                    long: expect.any(Number),
+                    recAreaName: expect.any(String),
+                    recAreaDescription: expect.any(String),
+                    recAreaDirections: expect.any(String),
+                }),
+            ])
+        );
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
