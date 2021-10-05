@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS campsites;
 DROP TABLE IF EXISTS recareas;
+DROP TABLE IF EXISTS events;
 
 CREATE TABLE campsites (
     id SMALLINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -17,4 +18,11 @@ CREATE TABLE recareas (
     lat REAL,
     long REAL
 );
+
+CREATE TABLE events (
+    id SMALLINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    entity_id SMALLINT,
+    event_name VARCHAR(256),
+    description TEXT
+)
 
