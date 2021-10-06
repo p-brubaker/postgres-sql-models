@@ -119,7 +119,7 @@ describe('Events routes', () => {
     });
 
     it('should update an event by id', async () => {
-        const res = await request.patch('/api/events/1').send({
+        const res = await request(app).patch('/api/events/1').send({
             eventName: 'Cow Herding',
             description: 'Herd all the cows',
         });
