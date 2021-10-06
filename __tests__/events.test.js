@@ -69,6 +69,11 @@ describe('Events routes', () => {
             onUnhandledRequest: 'bypass',
         })
     );
+    beforeEach(async () => {
+        await setup(pool);
+        const entityId = '14748';
+        await request(app).post('/api/events').send({ id: entityId });
+    });
 
     afterEach(() => server.resetHandlers());
 
@@ -84,6 +89,32 @@ describe('Events routes', () => {
             eventName: 'Bison Roundup',
             description:
                 'The Roundup consists of two separate events: The Push and The Working.',
+        });
+    });
+
+    it('should get all events in the database', async () => {
+        const res = await request(app).get('/api/events');
+        expect(res.body).toEqual(
+            expect.arrayContaining([
+                {
+                    id: 1,
+                    entityId: 14748,
+                    eventName: 'Bison Roundup',
+                    description:
+                        'The Roundup consists of two separate events: The Push and The Working.',
+                },
+            ])
+        );
+    });
+
+    it('should get an event by id', async () => {
+        const res = await request(app).get('/api/events/1');
+        expect(res.body).toEqual({
+            id: 1,
+            entityId: 14748,
+            eventName: 'Bison Roundup',
+            description:
+                'The Roundup consists of two separate events: The Push and the Working.',
         });
     });
 
