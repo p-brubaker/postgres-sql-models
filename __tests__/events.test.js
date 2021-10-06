@@ -131,6 +131,12 @@ describe('Events routes', () => {
         });
     });
 
+    it('should delete an event by id', async () => {
+        await request(app).delete('/api/events/1');
+        const res = await request(app).get('/api/events');
+        expect(res.body).toEqual([]);
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
