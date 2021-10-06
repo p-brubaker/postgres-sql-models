@@ -26,7 +26,7 @@ describe('facilities routes', () => {
         await setup(pool);
         const query = { city: 'Portland', state: 'Oregon', radius: 100 };
         await request(app).post('/api/facilities').send(query);
-        const query2 = { city: 'Las Vegas', state: 'Nevada', radius: 100 };
+        const query2 = { city: 'Las Vegas', state: 'Nevada', radius: 200 };
         await request(app).post('/api/facilities').send(query2);
     });
 
@@ -61,21 +61,33 @@ describe('facilities routes', () => {
     it('should get all facilities', async () => {
         const res = await request(app).get('/api/facilities');
         expect(res.body).toEqual(
-            expect.arrayContaining(
-                expect.objectContaining({
+            expect.arrayContaining([
+                {
                     id: 1,
                     lat: expect.any(Number),
                     long: expect.any(Number),
                     description: expect.any(String),
-                }),
-                expect.objectContaining({
-                    id: 1,
+                },
+                {
+                    id: 2,
                     lat: expect.any(Number),
                     long: expect.any(Number),
                     description: expect.any(String),
-                })
-            )
+                },
+            ])
         );
+    });
+
+    it('should update a facility by id', async () => {
+        const res = await request(app).patch('/api/facilities/1').send({
+            description: 'Updated description',
+        });
+        expect(res.body).toEqual({
+            id: 1,
+            lat: expect.any(Number),
+            long: expect.any(Number),
+            description: 'Updated description',
+        });
     });
 
     afterAll(() => {
