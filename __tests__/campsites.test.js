@@ -2,11 +2,11 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
-import mockCampsiteData from './mockCampsitesRes.json';
+import mockCampsiteData from './campsites/mockCampsitesRes.json';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 
-describe('demo routes', () => {
+describe('Campsite routes', () => {
     const server = setupServer(
         rest.get(
             'https://ridb.recreation.gov/api/v1/campsites',
@@ -16,7 +16,11 @@ describe('demo routes', () => {
         )
     );
 
-    beforeAll(() => server.listen());
+    beforeAll(() =>
+        server.listen({
+            onUnhandledRequest: 'bypass',
+        })
+    );
     afterEach(() => server.resetHandlers());
 
     it('should save and return a campsite that is within x miles of a given city', async () => {
