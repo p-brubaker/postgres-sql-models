@@ -114,7 +114,7 @@ describe('Events routes', () => {
             entityId: 14748,
             eventName: 'Bison Roundup',
             description:
-                'The Roundup consists of two separate events: The Push and the Working.',
+                'The Roundup consists of two separate events: The Push and The Working.',
         });
     });
 
