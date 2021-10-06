@@ -90,6 +90,22 @@ describe('facilities routes', () => {
         });
     });
 
+    it('should delete a facility by id', async () => {
+        await request(app).delete('/api/facilities/1');
+        const res = await request(app).get('/api/facilites');
+        expect(res.body).toEqual(
+            expect.arrayContaining([
+                {
+                    id: 2,
+                    lat: expect.any(Number),
+                    long: expect.any(Number),
+                    description: expect.any(String),
+                },
+            ])
+        );
+        expect(res.body.length).toEqual(1);
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
