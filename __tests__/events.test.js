@@ -118,6 +118,19 @@ describe('Events routes', () => {
         });
     });
 
+    it('should update an event by id', async () => {
+        const res = await request.patch('/api/events/1').send({
+            eventName: 'Cow Herding',
+            description: 'Herd all the cows',
+        });
+        expect(res.body).toEqual({
+            id: 1,
+            entityId: 14748,
+            eventName: 'Cow Herding',
+            description: 'Herd all the cows',
+        });
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
