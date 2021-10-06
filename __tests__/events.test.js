@@ -77,7 +77,7 @@ describe('Events routes', () => {
 
     afterEach(() => server.resetHandlers());
 
-    it('should get an event associated with a given recareas id, save it and return it', async () => {
+    xit('should get an event associated with a given recareas id, save it and return it', async () => {
         await setup(pool);
         const entityId = '14748';
         const result = await request(app)
@@ -92,7 +92,7 @@ describe('Events routes', () => {
         });
     });
 
-    it('should get all events in the database', async () => {
+    xit('should get all events in the database', async () => {
         const res = await request(app).get('/api/events');
         expect(res.body).toEqual(
             expect.arrayContaining([
@@ -107,7 +107,7 @@ describe('Events routes', () => {
         );
     });
 
-    it('should get an event by id', async () => {
+    xit('should get an event by id', async () => {
         const res = await request(app).get('/api/events/1');
         expect(res.body).toEqual({
             id: 1,
@@ -118,7 +118,7 @@ describe('Events routes', () => {
         });
     });
 
-    it('should update an event by id', async () => {
+    xit('should update an event by id', async () => {
         const res = await request(app).patch('/api/events/1').send({
             eventName: 'Cow Herding',
             description: 'Herd all the cows',
@@ -131,7 +131,7 @@ describe('Events routes', () => {
         });
     });
 
-    it('should delete an event by id', async () => {
+    xit('should delete an event by id', async () => {
         await request(app).delete('/api/events/1');
         const res = await request(app).get('/api/events');
         expect(res.body).toEqual([]);
