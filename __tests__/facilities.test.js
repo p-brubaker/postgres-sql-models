@@ -58,6 +58,26 @@ describe('facilities routes', () => {
         );
     });
 
+    it('should get all facilities', async () => {
+        const res = await request(app).get('/api/facilities');
+        expect(res.body).toEqual(
+            expect.arrayContaining(
+                expect.objectContaining({
+                    id: 1,
+                    lat: expect.any(Number),
+                    long: expect.any(Number),
+                    description: expect.any(String),
+                }),
+                expect.objectContaining({
+                    id: 1,
+                    lat: expect.any(Number),
+                    long: expect.any(Number),
+                    description: expect.any(String),
+                })
+            )
+        );
+    });
+
     afterAll(() => {
         pool.end();
         server.close();
