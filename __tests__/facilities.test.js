@@ -92,7 +92,7 @@ describe('facilities routes', () => {
 
     it('should delete a facility by id', async () => {
         await request(app).delete('/api/facilities/1');
-        const res = await request(app).get('/api/facilites');
+        const res = await request(app).get('/api/facilities');
         expect(res.body).toEqual(
             expect.arrayContaining([
                 {
