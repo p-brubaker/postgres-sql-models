@@ -24,7 +24,7 @@ describe('Rec Area routes', () => {
 
     afterEach(() => server.resetHandlers());
 
-    xit('should save and return a recarea that is within x miles of a given city', async () => {
+    it('should save and return a recarea that is within x miles of a given city', async () => {
         await setup(pool);
         const query = { city: 'Portland', state: 'Oregon', radius: 150 };
         const result = await request(app).post('/api/recareas').send(query);
@@ -40,7 +40,7 @@ describe('Rec Area routes', () => {
         );
     });
 
-    xit('should get all recareas in the database', async () => {
+    it('should get all recareas in the database', async () => {
         await setup(pool);
         await request(app)
             .post('/api/recareas')
@@ -75,7 +75,7 @@ describe('Rec Area routes', () => {
         );
     });
 
-    xit('should get a recarea by id', async () => {
+    it('should get a recarea by id', async () => {
         await setup(pool);
         await request(app)
             .post('/api/recareas')
@@ -91,7 +91,7 @@ describe('Rec Area routes', () => {
         );
     });
 
-    xit('should update a rec area by id', async () => {
+    it('should update a rec area by id', async () => {
         await setup(pool);
         await request(app)
             .post('/api/recareas')
@@ -108,7 +108,7 @@ describe('Rec Area routes', () => {
         );
     });
 
-    xit('should delete a recarea from the database by id', async () => {
+    it('should delete a recarea from the database by id', async () => {
         await setup(pool);
         await request(app)
             .post('/api/recareas')

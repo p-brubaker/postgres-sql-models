@@ -23,7 +23,7 @@ describe('Campsite routes', () => {
     );
     afterEach(() => server.resetHandlers());
 
-    xit('should save and return a campsite that is within x miles of a given city', async () => {
+    it('should save and return a campsite that is within x miles of a given city', async () => {
         await setup(pool);
         const query = { city: 'Portland', state: 'Oregon', radius: 75 };
         const result = await request(app).post('/api/campsites').send(query);
@@ -36,7 +36,7 @@ describe('Campsite routes', () => {
         );
     });
 
-    xit('should get all campsites in the database', async () => {
+    it('should get all campsites in the database', async () => {
         await setup(pool);
         await request(app)
             .post('/api/campsites')
@@ -65,7 +65,7 @@ describe('Campsite routes', () => {
         );
     });
 
-    xit('should get a campsite by id', async () => {
+    it('should get a campsite by id', async () => {
         await setup(pool);
         await request(app)
             .post('/api/campsites')
@@ -80,7 +80,7 @@ describe('Campsite routes', () => {
         );
     });
 
-    xit('should update a campsite by id', async () => {
+    it('should update a campsite by id', async () => {
         await setup(pool);
         await request(app)
             .post('/api/campsites')
@@ -101,7 +101,7 @@ describe('Campsite routes', () => {
         );
     });
 
-    xit('should delete a campsite from the database by id', async () => {
+    it('should delete a campsite from the database by id', async () => {
         await setup(pool);
         await request(app)
             .post('/api/campsites')
